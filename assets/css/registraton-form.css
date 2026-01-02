@@ -1,0 +1,17 @@
+ body {
+    background:  #f8f9fa;
+ }
+ .theme-bg {
+      background-color: #e04a0e;
+    }
+    .theme-text {
+      color: #e04a0e;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #e04a0e;
+      box-shadow: 0 0 0 0.15rem rgba(224, 74, 14, 0.25);
+    }
+    .required::after {
+      content: " *";
+      color: red;
+    }
