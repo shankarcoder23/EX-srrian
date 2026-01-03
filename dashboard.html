@@ -21,7 +21,7 @@ body{
 
 /* Sidebar */
 .sidebar{
-  background:#fff;
+  background:#ffffff;
   border-radius:18px;
   padding:18px;
 }
@@ -43,12 +43,13 @@ body{
 }
 .sidebar a.active,
 .sidebar a:hover{
-  background:linear-gradient(90deg,var(--primary),#ff7b45);
+  background:#ff7b45;
   color:#fff;
 }
 .sidebar a.active i,
-.sidebar a:hover i{color:#fff}
-
+.sidebar a:hover i{
+  color:#fff;
+}
 /* Main Card */
 .card-modern{
   background:#fff;
@@ -70,12 +71,11 @@ body{
 .btn-main{
   background:var(--primary);
   color:#fff;
-  border:none;
-  border-radius:10px;
-  padding:10px 18px;
 }
-.btn-main:hover{background:var(--dark);}
-
+.btn-main:hover{
+  background:#ff7b45;
+  color:#fff;
+}
 /* Table */
 .table th{
   width:35%;
@@ -88,23 +88,75 @@ body{
   border-color:var(--primary);
   box-shadow:0 0 0 .2rem rgba(224,74,14,.25);
 }
+
+/* Mobile toggle (bi-list) hover color */
+.navbar .btn-outline-primary{
+  border-color:#ff7b45;
+  color:#ff7b45;
+}
+
+.navbar .btn-outline-primary:hover{
+  background:#ff7b45;
+  border-color:#ff7b45;
+  color:#fff;
+}
+
+/* Icon color inside button */
+.navbar .btn-outline-primary i{
+  color:#ff7b45;
+}
+
+.navbar .btn-outline-primary:hover i{
+  color:#fff;
+}
+
+/* View Messages Scroll */
+.message-scroll{
+  max-height: 220px;   /* default height */
+  overflow: hidden;
+  transition: all .3s ease;
+}
+
+.message-scroll.active{
+  overflow-y: auto;
+}
+
+/* View Messages Scroll - increased height */
+.message-scroll{
+  max-height: 400px;   /* increase height from 220px to 400px */
+  overflow: hidden;
+  transition: all .3s ease;
+}
+
+.message-scroll.active{
+  overflow-y: auto;
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- ===== MOBILE NAVBAR ===== -->
+<nav class="navbar navbar-light bg-white shadow-sm d-lg-none">
+  <div class="container-fluid">
+    <button class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+      <i class="bi bi-list"></i>
+    </button>
+    <span class="fw-bold"> Ex Srrian Student Dashboard</span>
+  </div>
+</nav>
+
 <div class="container py-4">
   <div class="row g-4">
 
-    <!-- SIDEBAR -->
-    <div class="col-lg-3">
+    <!-- ===== DESKTOP SIDEBAR ===== -->
+    <div class="col-lg-3 d-none d-lg-block">
       <div class="sidebar shadow-sm">
         <a class="active" onclick="loadProfile(this)">
           <i class="bi bi-person-circle"></i> My Profile
         </a>
-        <a onclick="loadData(this)">
-          <i class="bi bi-database"></i> View All Data
-        </a>
+        
         <a onclick="loadPassword(this)">
           <i class="bi bi-shield-lock"></i> Change Password
         </a>
@@ -112,13 +164,14 @@ body{
           <i class="bi bi-envelope-paper"></i> Contact Coordinator
         </a>
         <hr>
-        <a class="text-danger">
+        <a href="index.html" 
+        class="text-danger">
           <i class="bi bi-box-arrow-right"></i> Logout
         </a>
       </div>
     </div>
 
-    <!-- CONTENT -->
+    <!-- ===== CONTENT ===== -->
     <div class="col-lg-9">
       <div id="content"></div>
     </div>
@@ -126,9 +179,39 @@ body{
   </div>
 </div>
 
+<!-- ===== MOBILE OFFCANVAS SIDEBAR ===== -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="sidebar">
+      <a class="active" onclick="loadProfile(this)" data-bs-dismiss="offcanvas">
+        <i class="bi bi-person-circle"></i> My Profile
+      </a>
+      <!-- <a onclick="loadData(this)" data-bs-dismiss="offcanvas">
+        <i class="bi bi-database"></i> View All Data
+      </a> -->
+      <a onclick="loadPassword(this)" data-bs-dismiss="offcanvas">
+        <i class="bi bi-shield-lock"></i> Change Password
+      </a>
+      <a onclick="loadContact(this)" data-bs-dismiss="offcanvas">
+        <i class="bi bi-envelope-paper"></i> Contact Coordinator
+      </a>
+      <hr>
+      <a href="index.html" class="text-danger">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+const content = document.getElementById('content');
+
 function setActive(el){
   document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
   el.classList.add('active');
@@ -147,90 +230,260 @@ content.innerHTML=`
       <button class="btn btn-main w-100">Update Photo</button>
     </div>
     <div class="col-md-8">
-      <table class="table table-bordered rounded">
+      <table class="table table-bordered">
+        <tr><th>Registration No</th><td>SRA0003</td></tr>
         <tr><th>Name</th><td>John Doe</td></tr>
         <tr><th>Phone</th><td>1234567891</td></tr>
-        <tr><th>Course</th><td>Graduated</td></tr>
-        <tr><th>Duration</th><td>3 Years</td></tr>
-        <tr><th>Start Date</th><td>12-06-2020</td></tr>
-        <tr><th>End Date</th><td>20-12-2023</td></tr>
+        <tr><th>Email Id</th><td>abcd@gmail.com</td></tr>
+        <tr><th>Stream</th><td>Arts</td></tr>
+        <tr><th>Status</th><td><small class="btn btn-success btn-sm">
+    Active
+  </small></td></tr>
+        
       </table>
     </div>
   </div>
 </div>`;
 }
 
-/* VIEW DATA */
-function loadData(el){
-setActive(el);
-content.innerHTML=`
-<div class="card-modern shadow-sm">
-<h3>View All Data</h3>
-<p class="text-muted">Access and review your complete profile details.</p>
-<table class="table table-striped">
-<tr><th>Registration ID</th><td>EXSR-2023</td></tr>
-<tr><th>Email</th><td>student@email.com</td></tr>
-<tr><th>Status</th><td><span class="badge bg-success">Active</span></td></tr>
-</table>
-</div>`;
-}
+// /* VIEW DATA */
+// function loadData(el){
+// setActive(el);
+// content.innerHTML=`
+// <div class="card-modern shadow-sm">
+// <h3>View All Data</h3>
+// <table class="table table-striped">
+// <tr><th>Registration ID</th><td>EXSR-2023</td></tr>
+// <tr><th>Email</th><td>student@email.com</td></tr>
+// <tr><th>Status</th><td><span class="badge bg-success">Active</span></td></tr>
+// </table>
+// </div>`;
+// }
 
 /* CHANGE PASSWORD */
 function loadPassword(el){
-setActive(el);
-content.innerHTML=`
-<div class="card-modern shadow-sm">
-<h3>Change Password</h3>
-<form>
-<div class="mb-3">
-<label>Current Password</label>
-<input type="password" class="form-control" required>
-</div>
-<div class="mb-3">
-<label>New Password</label>
-<input type="password" class="form-control" minlength="8" required>
-<small class="text-muted">Minimum 8 characters</small>
-</div>
-<div class="mb-3">
-<label>Confirm Password</label>
-<input type="password" class="form-control" required>
-</div>
-<button class="btn btn-main">Update Password</button>
-</form>
-</div>`;
+  setActive(el);
+  content.innerHTML=`
+  <div class="card-modern shadow-sm">
+    <h3>Change Password</h3>
+    <form id="passwordForm">
+      
+      <div class="mb-3 position-relative">
+        <label>Current Password</label>
+        <input type="password" class="form-control" id="currentPassword" required>
+        <i class="bi bi-eye-slash position-absolute" 
+           style="top:33px; right:10px; cursor:pointer;" 
+           onclick="togglePassword('currentPassword', this)"></i>
+      </div>
+
+      <div class="mb-3 position-relative">
+        <label>New Password</label>
+        <input type="password" class="form-control" id="newPassword" minlength="8" required>
+        <small class="text-muted">Minimum 8 characters</small>
+        <i class="bi bi-eye-slash position-absolute" 
+           style="top:33px; right:10px; cursor:pointer;" 
+           onclick="togglePassword('newPassword', this)"></i>
+        <div id="newPasswordAlert" class="text-danger mt-1" style="display:none;">Password must be at least 8 characters!</div>
+      </div>
+
+      <div class="mb-3 position-relative">
+        <label>Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" required>
+        <i class="bi bi-eye-slash position-absolute" 
+           style="top:33px; right:10px; cursor:pointer;" 
+           onclick="togglePassword('confirmPassword', this)"></i>
+        <div id="confirmPasswordAlert" class="text-danger mt-1" style="display:none;">Passwords do not match!</div>
+      </div>
+
+      <button type="submit" class="btn btn-main">Update Password</button>
+    </form>
+  </div>
+  `;
+
+  const newPass = document.getElementById('newPassword');
+  const confirmPass = document.getElementById('confirmPassword');
+  const newAlert = document.getElementById('newPasswordAlert');
+  const confirmAlert = document.getElementById('confirmPasswordAlert');
+
+  // Real-time validation for new password length
+  newPass.addEventListener('input', ()=>{
+    if(newPass.value.length < 8){
+      newAlert.style.display = 'block';
+    } else {
+      newAlert.style.display = 'none';
+    }
+  });
+
+  // Real-time validation for password match
+  confirmPass.addEventListener('input', ()=>{
+    if(confirmPass.value !== newPass.value){
+      confirmAlert.style.display = 'block';
+    } else {
+      confirmAlert.style.display = 'none';
+    }
+  });
+
+  // Form submit
+  document.getElementById('passwordForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if(newPass.value.length < 8){
+      newAlert.style.display = 'block';
+      newPass.focus();
+      return;
+    }
+    if(newPass.value !== confirmPass.value){
+      confirmAlert.style.display = 'block';
+      confirmPass.focus();
+      return;
+    }
+    alert('Password updated successfully!');
+    this.reset();
+  });
 }
+
+/* Toggle password visibility */
+function togglePassword(inputId, icon){
+  const input = document.getElementById(inputId);
+  if(input.type === 'password'){
+    input.type = 'text';
+    icon.classList.remove('bi-eye-slash');
+    icon.classList.add('bi-eye');
+  } else {
+    input.type = 'password';
+    icon.classList.remove('bi-eye');
+    icon.classList.add('bi-eye-slash');
+  }
+}
+
+
 
 /* CONTACT */
 function loadContact(el){
-setActive(el);
-const id="MSG-"+Math.floor(Math.random()*9999);
-content.innerHTML=`
-<div class="card-modern shadow-sm">
-<h3>Contact Coordinator</h3>
-<form>
-<div class="mb-3">
-<label>Select Coordinator</label>
-<select class="form-select" required>
-<option value="">Choose</option>
-<option>Coordinator 1</option>
-<option>Coordinator 2</option>
-</select>
+  setActive(el);
+  const id = "MSG-" + Math.floor(Math.random()*9999);
+
+  content.innerHTML = `
+  <div class="card-modern shadow-sm">
+    <h3 class="mb-4">Contact Coordinator</h3>
+
+    <div class="row g-4">
+      
+      <!-- SEND MESSAGE -->
+      <div class="col-lg-6">
+        <div class="border rounded-4 p-4 h-100">
+          <h5 class="mb-3 text-primary">
+            <i class="bi bi-send"></i> Send Message
+          </h5>
+
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Select Coordinator</label>
+              <select class="form-select" required>
+                <option value="">Choose</option>
+                <option>Coordinator 1</option>
+                <option>Coordinator 2</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Write Message</label>
+              <textarea class="form-control" rows="4" required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Message ID</label>
+              <input class="form-control" value="${id}" readonly>
+            </div>
+
+            <button class="btn btn-main w-100">
+              <i class="bi bi-send-fill"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- VIEW MESSAGE -->
+      <div class="col-lg-6">
+        <div class="border rounded-4 p-4 h-100">
+          <h5 class="mb-3 text-success">
+            <i class="bi bi-chat-left-text"></i> View Messages
+          </h5>
+
+          <div id="messageBox" class="list-group message-scroll">
+
+  <a class="list-group-item list-group-item-action">
+    <div class="d-flex justify-content-between">
+      <strong>Coordinator 1</strong>
+      <span class="badge bg-warning">Pending</span>
+    </div>
+    <small class="text-muted">Message ID: MSG-1023</small>
+    <p class="mb-0 mt-1">Please update your documents.</p>
+  </a>
+
+  <a class="list-group-item list-group-item-action">
+    <div class="d-flex justify-content-between">
+      <strong>Coordinator 2</strong>
+      <span class="badge bg-success">Replied</span>
+    </div>
+    <small class="text-muted">Message ID: MSG-0911</small>
+    <p class="mb-0 mt-1">Your request has been approved.</p>
+  </a>
+
+  <!-- more messages can come here -->
+
+  <a class="list-group-item list-group-item-action">
+    <div class="d-flex justify-content-between">
+      <strong>Coordinator 2</strong>
+      <span class="badge bg-success">Replied</span>
+    </div>
+    <small class="text-muted">Message ID: MSG-0911</small>
+    <p class="mb-0 mt-1">Your request has been approved.</p>
+  </a>
+
+  <a class="list-group-item list-group-item-action">
+    <div class="d-flex justify-content-between">
+      <strong>Coordinator 2</strong>
+      <span class="badge bg-success">Replied</span>
+    </div>
+    <small class="text-muted">Message ID: MSG-0911</small>
+    <p class="mb-0 mt-1">Your request has been approved.</p>
+  </a>
+
+<a class="list-group-item list-group-item-action">
+    <div class="d-flex justify-content-between">
+      <strong>Coordinator 2</strong>
+      <span class="badge bg-success">Replied</span>
+    </div>
+    <small class="text-muted">Message ID: MSG-0911</small>
+    <p class="mb-0 mt-1">Your request has been approved.</p>
+  </a>
+
 </div>
-<div class="mb-3">
-<label>Write Message</label>
-<textarea class="form-control" rows="4" required></textarea>
+
+<div class="text-center mt-3">
+  <button class="btn btn-outline-primary btn-sm"
+    onclick="enableMessageScroll(this)">
+    View All Messages
+  </button>
 </div>
-<div class="mb-3">
-<label>Message ID</label>
-<input class="form-control" value="${id}" readonly>
-</div>
-<button class="btn btn-main">Send Message</button>
-<span class="badge bg-warning ms-3">Pending</span>
-</form>
-</div>`;
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>`;
 }
 
+
 window.onload=()=>loadProfile(document.querySelector('.sidebar a'));
+
+function enableMessageScroll(btn){
+  const box = document.getElementById("messageBox");
+  box.classList.add("active");
+  btn.style.display = "none"; // hide button after click
+}
+
 </script>
 
 </body>

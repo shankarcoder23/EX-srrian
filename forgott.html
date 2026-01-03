@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forgot Password | EX-SRRIAN</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f09c7b;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .forgot-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 366px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .forgot-card h3 {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #4A90E2;
+    }
+    .btn-primary {
+      background: #ff7417;
+      border: none;
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+    .btn-primary:hover {
+      background: #357ABD;
+    }
+    .back-login {
+      margin-top: 1rem;
+      display: block;
+      color: #4A90E2;
+      text-decoration: none;
+    }
+    .back-login:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="forgot-card">
+    <h3>Forgot Password</h3>
+    <p>Enter your email address to reset your password.</p>
+    
+    <form id="forgotPasswordForm">
+      <div class="mb-3 text-start">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="email" placeholder="yourname@example.com" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Reset Link</button>
+    </form>
+
+    <a href="index.html" class="back-login">Back to Login</a>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const form = document.getElementById('forgotPasswordForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      if(email) {
+        alert(`Password reset link sent to ${email}`);
+        form.reset();
+      } else {
+        alert('Please enter a valid email.');
+      }
+    });
+  </script>
+</body>
+</html>
