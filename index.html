@@ -5,8 +5,9 @@
   <title>EX-SRRIAN | Login & Registration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap 5 & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
     body {
@@ -15,14 +16,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 15px;
     }
 
     .auth-card {
       background: #fff;
       border-radius: 15px;
       overflow: hidden;
-      max-width: 420px;
       width: 100%;
+      max-width: 700px; /* compact for mobile by default */
+      display: flex;
+      flex-direction: column;
+    }
+
+    h4.card-header {
+      background: #e04a0e;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin: 0;
     }
 
     .toggle-box {
@@ -31,7 +43,7 @@
       border-radius: 30px;
       display: flex;
       padding: 5px;
-      margin-bottom: 25px;
+      margin: 15px;
     }
 
     .toggle-btn {
@@ -59,26 +71,19 @@
       left: 50%;
     }
 
-    .toggle-box span {
-      color: #000;
-    }
-
     .toggle-box .active {
       color: #fff;
     }
 
     .form-section {
       display: none;
+      padding: 1rem 2rem 2rem 2rem;
+      max-height: 500px;
+      overflow-y: auto;
     }
 
     .form-section.active {
       display: block;
-      animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .btn-theme {
@@ -89,15 +94,33 @@
     .btn-theme:hover {
       background: #c63f0b;
     }
+
+    .required::after {
+      content: "*";
+      color: red;
+      margin-left: 2px;
+    }
+
+    /* ===== DESKTOP VIEW ===== */
+    @media (min-width: 992px) {
+      .auth-card {
+        max-width: 1000px; /* expand to match your original registration form */
+      }
+      .form-section {
+        max-height: none;
+        overflow: visible; /* show full form */
+      }
+    }
   </style>
 </head>
 
 <body>
 
-<div class="auth-card shadow-lg p-4">
-  <h4 class="text-center mb-4 fw-bold">EX-SRRIAN PANEL</h4>
+<div class="auth-card shadow-lg">
 
-  <!-- SLIDE TOGGLE -->
+   <h4 class="card-header">EX-STUDENT REGISTRATION <br>(EX-SRRIAN)</br></h4>
+
+  <!-- Toggle Buttons -->
   <div class="toggle-box" id="toggleBox">
     <div class="toggle-slider"></div>
     <div class="toggle-btn active" id="loginBtn">Login</div>
@@ -116,28 +139,148 @@
       <input type="password" class="form-control" placeholder="Enter password">
     </div>
 
+    <div class="mb-3 text-end">
+      <a href="#" class="small text-decoration-none">Forgot Password?</a>
+    </div>
+
     <button class="btn btn-theme w-100">Login</button>
   </div>
 
-  <!-- REGISTRATION FORM -->
+  <!-- FULL STUDENT REGISTRATION FORM -->
   <div class="form-section" id="registerForm">
-    <div class="mb-3">
-      <label class="form-label">Full Name</label>
-      <input type="text" class="form-control" placeholder="Enter full name">
-    </div>
+    <form id="registrationForm" novalidate>
+      <!-- PERSONAL INFORMATION -->
+      <h5 class="theme-text mb-3">Personal Information</h5>
 
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-control" placeholder="Enter email">
-    </div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label required">Full Name</label>
+          <input type="text" class="form-control" id="fullName" pattern="^[A-Za-z\s]+$" required>
+          <div class="invalid-feedback">Please enter full name.</div>
+        </div>
 
-    <div class="mb-3">
-      <label class="form-label">Create Password</label>
-      <input type="password" class="form-control" placeholder="Min 8 characters">
-    </div>
+        <div class="col-md-6">
+          <label class="form-label required">Password (Create Password)</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password" minlength="8" required>
+            <span class="input-group-text bg-white" id="togglePassword" style="cursor:pointer;">
+              <i class="bi bi-eye-slash-fill"></i>
+            </span>
+            <div class="invalid-feedback">Minimum 8 characters required.</div>
+          </div>
+        </div>
 
-    <button class="btn btn-theme w-100">Register</button>
+        <div class="col-md-4">
+          <label class="form-label required">Select Class</label>
+          <select class="form-select" required>
+            <option value="">Choose...</option>
+            <option>10th</option>
+            <option>12th</option>
+            <option>Graduated</option>
+          </select>
+          <div class="invalid-feedback">Select class.</div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label required">Passed Out Year</label>
+          <select class="form-select" required>
+            <option value="">Choose...</option>
+            <script>
+              for (let y = 1990; y <= 2025; y++) {
+                document.write(`<option>${y}</option>`);
+              }
+            </script>
+          </select>
+          <div class="invalid-feedback">Select year.</div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label required">Stream</label>
+          <select class="form-select" required>
+            <option value="">Choose...</option>
+            <option>Arts</option>
+            <option>Commerce</option>
+          </select>
+          <div class="invalid-feedback">Select stream.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Roll Number (Optional)</label>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- CONTACT DETAILS -->
+      <h5 class="theme-text mb-3">Contact Details</h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label required">Email Address</label>
+          <input type="email" class="form-control" required>
+          <div class="invalid-feedback">Enter valid email.</div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label required">Phone Number</label>
+          <input type="tel" class="form-control" pattern="[0-9]{10}" required>
+          <div class="invalid-feedback">Enter 10 digit number.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label required">Current Address</label>
+          <textarea class="form-control" rows="3" required></textarea>
+          <div class="invalid-feedback">Address required.</div>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- PROFESSIONAL DETAILS -->
+      <h5 class="theme-text mb-3">Professional Details</h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Current Profession / Job Title</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Organization / Company</label>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- ALUMNI MEET -->
+      <h5 class="theme-text mb-3">Alumni Meet Participation  <label class="text-danger ms-2">(Please select an option)
+  </label><br></h5>
+      <div class="mb-3">
+        <label class="form-label required">Would you like to volunteer?</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="volunteer" required>
+          <label class="form-check-label">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="volunteer" required>
+          <label class="form-check-label">No</label>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Memories / Suggestions</label>
+        <textarea class="form-control" rows="3"></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Upload Photo (Max 5)</label>
+        <input type="file" class="form-control" id="photos" multiple accept="image/*">
+        <small class="text-muted">Maximum 5 images allowed.</small>
+      </div>
+
+      <div class="text-center mb-4">
+        <button type="submit" class="btn btn-theme px-5">Submit Registration</button>
+      </div>
+    </form>
   </div>
+
 </div>
 
 <!-- Bootstrap JS -->
@@ -149,6 +292,7 @@
   const registerBtn = document.getElementById("registerBtn");
   const loginForm = document.getElementById("loginForm");
   const registerForm = document.getElementById("registerForm");
+   const fullNameInput = document.getElementById("fullName");
 
   loginBtn.onclick = () => {
     toggleBox.classList.remove("register-active");
@@ -165,6 +309,18 @@
     registerForm.classList.add("active");
     loginForm.classList.remove("active");
   };
+   fullNameInput.addEventListener("input", () => {
+    fullNameInput.value = fullNameInput.value.replace(/[^A-Za-z\s]/g, "");
+  });
+
+  // Password toggle
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordInput = document.getElementById("password");
+  togglePassword.addEventListener("click", () => {
+    const type = passwordInput.type === "password" ? "text" : "password";
+    passwordInput.type = type;
+    togglePassword.innerHTML = type === "password" ? '<i class="bi bi-eye-slash-fill"></i>' : '<i class="bi bi-eye-fill"></i>';
+  });
 </script>
 
 </body>
