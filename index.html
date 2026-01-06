@@ -144,6 +144,11 @@
         <input type="password" class="form-control" placeholder="Enter password">
       </div>
 
+      <div class="mb-3 text-left">
+        <a href="" class="small text-decoration-none">Don’t have an account? Register here</a>
+      </div>
+
+
       <div class="mb-3 text-end">
         <a href="forgott.html" class="small text-decoration-none">Forgot Password?</a>
       </div>
@@ -338,16 +343,23 @@
           <textarea class="form-control" rows="3"></textarea>
         </div>
 
-        <div class="col-md-4">
-          <label class="form-label">Upload Your Profile Photo</label>
-          <input type="file" class="form-control" id="photos" accept="image/*">  
-        </div>
+        <div class="row g-3">
 
-        <div class="col-md-4">
-          <label class="form-label">Upload Photo (Max 5)</label>
-          <input type="file" class="form-control" id="photos" multiple accept="image/*">
-          <small class="text-muted">Maximum 5 images allowed.</small>
-        </div>
+  <!-- Profile Photo -->
+  <div class="col-md-6">
+    <label class="form-label">Upload Your Profile Photo</label>
+    <input type="file" class="form-control" id="profilePhoto" accept="image/*">
+  </div>
+
+  <!-- Multiple Photos -->
+  <div class="col-md-6">
+    <label class="form-label">Upload Photo (Max 5)</label>
+    <input type="file" class="form-control" id="galleryPhotos" multiple accept="image/*">
+    <small class="text-muted">Maximum 5 images allowed.</small>
+  </div>
+
+</div>
+
 
 
         
