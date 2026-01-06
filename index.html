@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>EX-SRRIAN | Login & Registration</title>
@@ -24,7 +25,8 @@
       border-radius: 15px;
       overflow: hidden;
       width: 100%;
-      max-width: 700px; /* compact for mobile by default */
+      max-width: 700px;
+      /* compact for mobile by default */
       display: flex;
       flex-direction: column;
     }
@@ -104,11 +106,14 @@
     /* ===== DESKTOP VIEW ===== */
     @media (min-width: 992px) {
       .auth-card {
-        max-width: 1000px; /* expand to match your original registration form */
+        max-width: 1000px;
+        /* expand to match your original registration form */
       }
+
       .form-section {
         max-height: none;
-        overflow: visible; /* show full form */
+        overflow: visible;
+        /* show full form */
       }
     }
   </style>
@@ -116,212 +121,314 @@
 
 <body>
 
-<div class="auth-card shadow-lg">
+  <div class="auth-card shadow-lg">
 
-   <h5 class="card-header">EX-STUDENT REGISTRATION FORM<br> <span class="text-primary">(EX-SRRIAN)</span></br></h5>
+    <h5 class="card-header">EX-STUDENT REGISTRATION FORM<br> <span class="text-primary">(EX-SRRIAN)</span></br></h5>
 
-  <!-- Toggle Buttons -->
-  <div class="toggle-box" id="toggleBox">
-    <div class="toggle-slider"></div>
-    <div class="toggle-btn active" id="loginBtn">Login</div>
-    <div class="toggle-btn" id="registerBtn">Register</div>
-  </div>
-
-  <!-- LOGIN FORM -->
-  <div class="form-section active" id="loginForm">
-    <div class="mb-3">
-      <label class="form-label">Email / Reg. Number</label>
-      <input type="text" class="form-control" placeholder="Enter email or reg no">
+    <!-- Toggle Buttons -->
+    <div class="toggle-box" id="toggleBox">
+      <div class="toggle-slider"></div>
+      <div class="toggle-btn active" id="loginBtn">Login</div>
+      <div class="toggle-btn" id="registerBtn">Register</div>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Password</label>
-      <input type="password" class="form-control" placeholder="Enter password">
-    </div>
+    <!-- LOGIN FORM -->
+    <div class="form-section active" id="loginForm">
+      <div class="mb-3">
+        <label class="form-label">Email / Reg. Number</label>
+        <input type="text" class="form-control" placeholder="Enter email or reg no">
+      </div>
 
-    <div class="mb-3 text-end">
-      <a href="forgott.html" class="small text-decoration-none">Forgot Password?</a>
-    </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" placeholder="Enter password">
+      </div>
+
+      <div class="mb-3 text-end">
+        <a href="forgott.html" class="small text-decoration-none">Forgot Password?</a>
+      </div>
 
       <a href="dashboard.html" class="btn btn-theme w-100">Login</a>
-  </div>
+    </div>
 
-  <!-- FULL STUDENT REGISTRATION FORM -->
-  <div class="form-section" id="registerForm">
-    <form id="registrationForm" novalidate>
-      <!-- PERSONAL INFORMATION -->
-      <h5 class="theme-text mb-3">Personal Information</h5>
+    <!-- FULL STUDENT REGISTRATION FORM -->
+    <div class="form-section" id="registerForm">
+      <form id="registrationForm" novalidate>
+        <!-- PERSONAL INFORMATION -->
+        <h5 class="theme-text mb-3">Personal Information</h5>
 
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label class="form-label required">Full Name</label>
-          <input type="text" class="form-control" id="fullName" pattern="^[A-Za-z\s]+$" required>
-          <div class="invalid-feedback">Please enter full name.</div>
-        </div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label required">Full Name</label>
+            <input type="text" class="form-control" id="fullName" pattern="^[A-Za-z\s]+$" required>
+            <div class="invalid-feedback">Please enter full name.</div>
+          </div>
 
-        <div class="col-md-6">
-          <label class="form-label required">Password (Create Password)</label>
-          <div class="input-group">
-            <input type="password" class="form-control" id="password" minlength="8" required>
-            <span class="input-group-text bg-white" id="togglePassword" style="cursor:pointer;">
-              <i class="bi bi-eye-slash-fill"></i>
-            </span>
-            <div class="invalid-feedback">Minimum 8 characters required.</div>
+          <div class="col-md-6">
+            <label class="form-label required">Password (Create Password)</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="password" minlength="8" required>
+              <span class="input-group-text bg-white" id="togglePassword" style="cursor:pointer;">
+                <i class="bi bi-eye-slash-fill"></i>
+              </span>
+              <div class="invalid-feedback">Minimum 8 characters required.</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label required">Select Class</label>
+            <select class="form-select" required>
+              <option value="">Choose...</option>
+              <option>10th</option>
+              <option>12th</option>
+              <option>Graduated</option>
+            </select>
+            <div class="invalid-feedback">Select class.</div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label required">Passed Out Year</label>
+            <select class="form-select" required>
+              <option value="">Choose...</option>
+              <script>
+                for (let y = 1990; y <= 2025; y++) {
+                  document.write(`<option>${y}</option>`);
+                }
+              </script>
+            </select>
+            <div class="invalid-feedback">Select year.</div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label required">Stream</label>
+            <select class="form-select" required>
+              <option value="">Choose...</option>
+              <option>Arts</option>
+              <option>Commerce</option>
+            </select>
+            <div class="invalid-feedback">Select stream.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Roll Number (Optional)</label>
+            <input type="text" class="form-control">
           </div>
         </div>
 
-        <div class="col-md-4">
-          <label class="form-label required">Select Class</label>
-          <select class="form-select" required>
-            <option value="">Choose...</option>
-            <option>10th</option>
-            <option>12th</option>
-            <option>Graduated</option>
-          </select>
-          <div class="invalid-feedback">Select class.</div>
+        <hr class="my-4">
+
+        <!-- CONTACT DETAILS -->
+        <h5 class="theme-text mb-3">Contact Details</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label required">Email Address</label>
+            <input type="email" class="form-control" required>
+            <div class="invalid-feedback">Enter valid email.</div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label required">Phone Number</label>
+            <input type="tel" class="form-control" pattern="[0-9]{10}" required>
+            <div class="invalid-feedback">Enter 10 digit number.</div>
+          </div>
+          <div class="col-12">
+            <label class="form-label required">Current Address</label>
+            <textarea class="form-control" rows="3" required></textarea>
+            <div class="invalid-feedback">Address required.</div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <!--Computer Education-->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body">
+            <h5 class="fw-semibold mb-3">Computer Education</h5>
+
+            <!--Yes/No-->
+            <div class="mb-3">
+              <label class="form-label fw-medium">Do you have any computer skill?</label>
+              <div class="d-flex gap-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="computerEdu" id="computerYes">
+                  <label class="form-check-label" for="computerYes">Yes</label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-label" type="radio" name="computerEdu" id="computerNo" checked>
+                  <label class="form-check-label" for="computerNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <!--Course Name(Show on Yes)-->
+            <div id="computerCourse" class="row g-3 d-done">
+              <div class="col-md-4">
+                <label class="form-label">Course Name</label>
+                <input type="text" class="form-control" placeholder="e.g. DCA, ADCA, Tally, Web Design">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Details -->
+        <div class="card shadow-sm border-0 mb-4">
+          <div class="card-body">
+            <h5 class="fw-semibold mb-3">Professional Details</h5>
+
+            <!--Radio Buttons-->
+            <div class="mb-3">
+              <label class="form-label fw-medium">Are you currently working ?</label>
+              <div class="d-flex gap-4">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="workingStatus" id="workingYes">
+                  <label class="form-check-label" for="workingYes">Yes</label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="workingStatus" id="workingNo" checked>
+                  <label class="form-check-label" for="workingNo">No</label>
+                </div>
+              </div>
+            </div>
+
+            <!--Hidden Fields-->
+            <div id="professionalFields" class="row g-3 d-done">
+
+              <div class="col-md-4">
+                <label class="form-label">Company Name</label>
+                <input type="text" class="form-control" placeholder="Company name">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Job Role</label>
+                <input type="text" class="form-control" placeholder="Job role">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Experience (Years)</label>
+                <input type="number" class="form-control" placeholder="Experience">
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+        <hr class="my-4">
+
+        <!-- ALUMNI MEET -->
+        <h5 class="theme-text mb-3">Alumni Meet Participation <label class="text-danger ms-2">(Please select an option)
+          </label><br></h5>
+        <div class="mb-3">
+          <label class="form-label required">Would you like to volunteer?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="volunteer" required>
+            <label class="form-check-label">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="volunteer" required>
+            <label class="form-check-label">No</label>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Memories / Suggestions</label>
+          <textarea class="form-control" rows="3"></textarea>
         </div>
 
         <div class="col-md-4">
-          <label class="form-label required">Passed Out Year</label>
-          <select class="form-select" required>
-            <option value="">Choose...</option>
-            <script>
-              for (let y = 1990; y <= 2025; y++) {
-                document.write(`<option>${y}</option>`);
-              }
-            </script>
-          </select>
-          <div class="invalid-feedback">Select year.</div>
+          <label class="form-label">Upload Your Profile Photo</label>
+          <input type="file" class="form-control" id="photos" accept="image/*">  
         </div>
 
         <div class="col-md-4">
-          <label class="form-label required">Stream</label>
-          <select class="form-select" required>
-            <option value="">Choose...</option>
-            <option>Arts</option>
-            <option>Commerce</option>
-          </select>
-          <div class="invalid-feedback">Select stream.</div>
+          <label class="form-label">Upload Photo (Max 5)</label>
+          <input type="file" class="form-control" id="photos" multiple accept="image/*">
+          <small class="text-muted">Maximum 5 images allowed.</small>
         </div>
 
-        <div class="col-md-6">
-          <label class="form-label">Roll Number (Optional)</label>
-          <input type="text" class="form-control">
+
+        
+        
+        
+
+        <div class="text-center mb-4">
+          <button type="submit" class="btn btn-theme px-5">Submit Registration</button>
         </div>
-      </div>
+      </form>
+    </div>
 
-      <hr class="my-4">
-
-      <!-- CONTACT DETAILS -->
-      <h5 class="theme-text mb-3">Contact Details</h5>
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label class="form-label required">Email Address</label>
-          <input type="email" class="form-control" required>
-          <div class="invalid-feedback">Enter valid email.</div>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label required">Phone Number</label>
-          <input type="tel" class="form-control" pattern="[0-9]{10}" required>
-          <div class="invalid-feedback">Enter 10 digit number.</div>
-        </div>
-        <div class="col-12">
-          <label class="form-label required">Current Address</label>
-          <textarea class="form-control" rows="3" required></textarea>
-          <div class="invalid-feedback">Address required.</div>
-        </div>
-      </div>
-
-      <hr class="my-4">
-
-      <!-- PROFESSIONAL DETAILS -->
-      <h5 class="theme-text mb-3">Professional Details</h5>
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label class="form-label">Current Profession / Job Title</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Organization / Company</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-
-      <hr class="my-4">
-
-      <!-- ALUMNI MEET -->
-      <h5 class="theme-text mb-3">Alumni Meet Participation  <label class="text-danger ms-2">(Please select an option)
-  </label><br></h5>
-      <div class="mb-3">
-        <label class="form-label required">Would you like to volunteer?</label><br>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="volunteer" required>
-          <label class="form-check-label">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="volunteer" required>
-          <label class="form-check-label">No</label>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Memories / Suggestions</label>
-        <textarea class="form-control" rows="3"></textarea>
-      </div>
-
-      <div class="mb-4">
-        <label class="form-label">Upload Photo (Max 5)</label>
-        <input type="file" class="form-control" id="photos" multiple accept="image/*">
-        <small class="text-muted">Maximum 5 images allowed.</small>
-      </div>
-
-      <div class="text-center mb-4">
-        <button type="submit" class="btn btn-theme px-5">Submit Registration</button>
-      </div>
-    </form>
   </div>
 
-</div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const toggleBox = document.getElementById("toggleBox");
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const fullNameInput = document.getElementById("fullName");
 
-<script>
-  const toggleBox = document.getElementById("toggleBox");
-  const loginBtn = document.getElementById("loginBtn");
-  const registerBtn = document.getElementById("registerBtn");
-  const loginForm = document.getElementById("loginForm");
-  const registerForm = document.getElementById("registerForm");
-   const fullNameInput = document.getElementById("fullName");
+    loginBtn.onclick = () => {
+      toggleBox.classList.remove("register-active");
+      loginBtn.classList.add("active");
+      registerBtn.classList.remove("active");
+      loginForm.classList.add("active");
+      registerForm.classList.remove("active");
+    };
 
-  loginBtn.onclick = () => {
-    toggleBox.classList.remove("register-active");
-    loginBtn.classList.add("active");
-    registerBtn.classList.remove("active");
-    loginForm.classList.add("active");
-    registerForm.classList.remove("active");
-  };
+    registerBtn.onclick = () => {
+      toggleBox.classList.add("register-active");
+      registerBtn.classList.add("active");
+      loginBtn.classList.remove("active");
+      registerForm.classList.add("active");
+      loginForm.classList.remove("active");
+    };
+    fullNameInput.addEventListener("input", () => {
+      fullNameInput.value = fullNameInput.value.replace(/[^A-Za-z\s]/g, "");
+    });
 
-  registerBtn.onclick = () => {
-    toggleBox.classList.add("register-active");
-    registerBtn.classList.add("active");
-    loginBtn.classList.remove("active");
-    registerForm.classList.add("active");
-    loginForm.classList.remove("active");
-  };
-   fullNameInput.addEventListener("input", () => {
-    fullNameInput.value = fullNameInput.value.replace(/[^A-Za-z\s]/g, "");
-  });
+    // Password toggle
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+    togglePassword.addEventListener("click", () => {
+      const type = passwordInput.type === "password" ? "text" : "password";
+      passwordInput.type = type;
+      togglePassword.innerHTML = type === "password" ? '<i class="bi bi-eye-slash-fill"></i>' : '<i class="bi bi-eye-fill"></i>';
+    });
 
-  // Password toggle
-  const togglePassword = document.getElementById("togglePassword");
-  const passwordInput = document.getElementById("password");
-  togglePassword.addEventListener("click", () => {
-    const type = passwordInput.type === "password" ? "text" : "password";
-    passwordInput.type = type;
-    togglePassword.innerHTML = type === "password" ? '<i class="bi bi-eye-slash-fill"></i>' : '<i class="bi bi-eye-fill"></i>';
-  });
-</script>
+    // working Yes/No
+    const yesRadio = document.getElementById("workingYes");
+    const noRadio = document.getElementById("workingNo");
+    const fields = document.getElementById("professionalFields");
+
+    yesRadio.addEventListener("change", () => {
+      fields.classList.remove("d-none");
+    });
+
+    noRadio.addEventListener("change", () => {
+      fields.classList.add("d-none");
+    });
+
+    //Skill Yes/No
+    const computerYes = document.getElementById("computerYes");
+    const computerNo = document.getElementById("computerNo");
+    const courseField = document.getElementById("computerCourse");
+
+    computerYes.addEventListener("change", () => {
+      courseField.classList.remove("d-none");
+    });
+
+    computerNo.addEventListener("change", () => {
+      courseField.classList.add("d-none");
+    });
+
+  </script>
 
 </body>
+
 </html>
