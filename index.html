@@ -149,6 +149,18 @@
         /* show full form */
       }
     }
+
+ 
+
+/* Select box focus (after click) */
+.form-select:focus {
+  border-color: #fa8d08; /* orange */
+  box-shadow: 0 0 0 0.25rem rgba(226, 212, 195, 0.623);
+  outline: none;
+}
+
+
+
   </style>
 </head>
 
@@ -177,11 +189,7 @@
         <input type="password" class="form-control" placeholder="Enter password">
       </div>
 
-     <div class="mb-3 text-left">
-  <span class="small">Don’t have an account?</span>
-  <a href="registerformBtn" class="small text-decoration-none fw-semibold ms-1"
-     onclick="showRegisterForm()">Register</a>
-</div>
+    
 
 
       <div class="mb-3 text-end">
@@ -289,12 +297,12 @@
               <label class="form-label fw-medium">Do you have any computer skill?</label>
               <div class="d-flex gap-4">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="computerEdu" id="computerYes">
+                  <input class="form-check-input" type="radio" name="computerEdu" id="computerYes" checked>
                   <label class="form-check-label" for="computerYes">Yes</label>
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-label" type="radio" name="computerEdu" id="computerNo" checked>
+                  <input class="form-check-label" type="radio" name="computerEdu" id="computerNo">
                   <label class="form-check-label" for="computerNo">No</label>
                 </div>
               </div>
@@ -320,12 +328,12 @@
               <label class="form-label fw-medium">Are you currently working ?</label>
               <div class="d-flex gap-4">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="workingStatus" id="workingYes">
+                  <input class="form-check-input" type="radio" name="workingStatus" id="workingYes" checked>
                   <label class="form-check-label" for="workingYes">Yes</label>
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="workingStatus" id="workingNo" checked>
+                  <input class="form-check-input" type="radio" name="workingStatus" id="workingNo">
                   <label class="form-check-label" for="workingNo">No</label>
                 </div>
               </div>
@@ -472,9 +480,30 @@
 
     computerNo.addEventListener("change", () => {
       courseField.classList.add("d-none");
+
+      
     });
 
-    
+    // REGISTER FORM VALIDATION + STAY ON PAGE
+registerForm.addEventListener("submit", function (e) {
+  e.preventDefault();   // stop redirect
+  e.stopPropagation();
+
+  if (!registerForm.checkValidity()) {
+    registerForm.classList.add("was-validated"); //  show required alerts
+
+    // auto scroll to first error
+    const firstInvalid = registerForm.querySelector(":invalid");
+    firstInvalid?.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    return;
+  }
+
+  //  SUCCESS
+  alert("Registration submitted successfully!");
+});
+
+
 
   </script>
 
