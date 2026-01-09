@@ -484,25 +484,40 @@
       
     });
 
-    // REGISTER FORM VALIDATION + STAY ON PAGE
-registerForm.addEventListener("submit", function (e) {
-  e.preventDefault();   // stop redirect
-  e.stopPropagation();
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-  if (!registerForm.checkValidity()) {
-    registerForm.classList.add("was-validated"); //  show required alerts
+  let form = this;
+  let isValid = true;
 
-    // auto scroll to first error
-    const firstInvalid = registerForm.querySelector(":invalid");
-    firstInvalid?.scrollIntoView({ behavior: "smooth", block: "center" });
+  // text, email, etc.
+  form.querySelectorAll("input[required]").forEach(input => {
+    if (input.type !== "radio" && !input.value.trim()) {
+      input.classList.add("is-invalid");
+      isValid = false;
+    } else if (input.type !== "radio") {
+      input.classList.remove("is-invalid");
+    }
+  });
 
-    return;
+  // radio validation
+  let radios = form.querySelectorAll("input[type='radio'][required]");
+  let radioChecked = [...radios].some(r => r.checked);
+
+  radios.forEach(radio => {
+    if (!radioChecked) {
+      radio.classList.add("is-invalid");
+      isValid = false;
+    } else {
+      radio.classList.remove("is-invalid");
+    }
+  });
+
+  if (isValid) {
+    // submit form or ajax here
+    alert("Form is valid");
   }
-
-  //  SUCCESS
-  alert("Registration submitted successfully!");
 });
-
 
 
   </script>
