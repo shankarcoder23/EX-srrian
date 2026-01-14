@@ -484,42 +484,56 @@
       
     });
 
-    document.getElementById("registerForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+     const registrationForm = document.getElementById("registrationForm");
 
-  let form = this;
-  let isValid = true;
+  registrationForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  // text, email, etc.
-  form.querySelectorAll("input[required]").forEach(input => {
-    if (input.type !== "radio" && !input.value.trim()) {
-      input.classList.add("is-invalid");
-      isValid = false;
-    } else if (input.type !== "radio") {
-      input.classList.remove("is-invalid");
+    let isValid = true;
+
+    // Clear previous errors
+    registrationForm.querySelectorAll(".is-invalid").forEach(el => {
+      el.classList.remove("is-invalid");
+    });
+
+    /* ---------- INPUT & TEXTAREA ---------- */
+    registrationForm.querySelectorAll("input[required], textarea[required]").forEach(input => {
+      if (input.type !== "radio" && !input.value.trim()) {
+        input.classList.add("is-invalid");
+        isValid = false;
+      }
+    });
+
+    /* ---------- SELECT ---------- */
+    registrationForm.querySelectorAll("select[required]").forEach(select => {
+      if (!select.value) {
+        select.classList.add("is-invalid");
+        isValid = false;
+      }
+    });
+
+    /* ---------- RADIO GROUP VALIDATION ---------- */
+    const requiredRadioGroups = [...new Set(
+      [...registrationForm.querySelectorAll("input[type='radio'][required]")]
+        .map(r => r.name)
+    )];
+
+    requiredRadioGroups.forEach(groupName => {
+      const radios = registrationForm.querySelectorAll(`input[name="${groupName}"]`);
+      const checked = [...radios].some(r => r.checked);
+
+      if (!checked) {
+        radios.forEach(r => r.classList.add("is-invalid"));
+        isValid = false;
+      }
+    });
+
+    /* ---------- FINAL RESULT ---------- */
+    if (isValid) {
+      alert("Form submitted successfully!");
+      // registrationForm.submit(); // enable when backend is ready
     }
   });
-
-  // radio validation
-  let radios = form.querySelectorAll("input[type='radio'][required]");
-  let radioChecked = [...radios].some(r => r.checked);
-
-  radios.forEach(radio => {
-    if (!radioChecked) {
-      radio.classList.add("is-invalid");
-      isValid = false;
-    } else {
-      radio.classList.remove("is-invalid");
-    }
-  });
-
-  if (isValid) {
-    // submit form or ajax here
-    alert("Form is valid");
-  }
-});
-
-
   </script>
 
 </body>
